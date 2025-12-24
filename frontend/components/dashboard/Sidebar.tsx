@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { LayoutDashboard, User, CreditCard, LogOut } from 'lucide-react';
+import { LayoutDashboard, User, CreditCard, LogOut, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 interface SidebarProps {
@@ -14,6 +14,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout, user }: Sid
     const menuItems = [
         { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { id: 'business_details', label: 'Business Details', icon: CreditCard },
+        { id: 'analytics', label: 'Analytics', icon: BarChart3 },
         { id: 'profile', label: 'Profile', icon: User },
     ];
 
@@ -39,8 +40,8 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout, user }: Sid
                                 key={item.id}
                                 onClick={() => setActiveTab(item.id)}
                                 className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl transition-all ${isActive
-                                        ? 'bg-blue-50 text-blue-600 dark:bg-slate-700 dark:text-white font-medium shadow-sm'
-                                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:hover:bg-slate-700/50 dark:hover:text-slate-200'
+                                    ? 'bg-blue-50 text-blue-600 dark:bg-slate-700 dark:text-white font-medium shadow-sm'
+                                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:hover:bg-slate-700/50 dark:hover:text-slate-200'
                                     }`}
                             >
                                 <Icon className={`w-5 h-5 ${isActive ? 'text-blue-600 dark:text-white' : 'text-slate-400'}`} />

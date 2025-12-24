@@ -44,20 +44,20 @@ export default function ContactForm({ cardId, whatsappNumber }: ContactFormProps
     };
 
     return (
-        <div className="bg-white dark:bg-slate-900 md:rounded-[2rem] p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+        <div className="glass-panel p-6 md:p-8 rounded-[2rem] h-full flex flex-col">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2 uppercase tracking-wide">
                 <MessageCircle className="w-5 h-5 text-blue-500" />
                 Quick Enquiry
             </h3>
 
             {success ? (
-                <div className="p-4 bg-green-50 text-green-700 rounded-xl text-center">
-                    <p className="font-semibold">Thank you!</p>
+                <div className="p-8 bg-green-500/10 text-green-600 rounded-2xl text-center border border-green-500/20 my-auto">
+                    <p className="font-bold text-lg mb-2">Thank you!</p>
                     <p className="text-sm">We have received your message.</p>
-                    <button onClick={() => setSuccess(false)} className="text-xs underline mt-2">Send another</button>
+                    <button onClick={() => setSuccess(false)} className="text-xs font-bold underline mt-4 hover:text-green-800">Send another</button>
                 </div>
             ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 flex-1">
                     <div>
                         <input
                             type="text"
@@ -65,7 +65,7 @@ export default function ContactForm({ cardId, whatsappNumber }: ContactFormProps
                             required
                             value={form.name}
                             onChange={e => setForm({ ...form, name: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                            className="w-full px-4 py-3.5 rounded-xl bg-white/40 dark:bg-white/5 border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-400 text-sm backdrop-blur-sm"
                         />
                     </div>
                     <div>
@@ -75,7 +75,7 @@ export default function ContactForm({ cardId, whatsappNumber }: ContactFormProps
                             required
                             value={form.phone}
                             onChange={e => setForm({ ...form, phone: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                            className="w-full px-4 py-3.5 rounded-xl bg-white/40 dark:bg-white/5 border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-400 text-sm backdrop-blur-sm"
                         />
                     </div>
                     <div>
@@ -84,13 +84,13 @@ export default function ContactForm({ cardId, whatsappNumber }: ContactFormProps
                             rows={3}
                             value={form.message}
                             onChange={e => setForm({ ...form, message: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm resize-none"
+                            className="w-full px-4 py-3.5 rounded-xl bg-white/40 dark:bg-white/5 border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-400 text-sm resize-none backdrop-blur-sm"
                         />
                     </div>
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+                        className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70 shadow-lg shadow-blue-500/30 mt-2"
                     >
                         {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                         Send Message

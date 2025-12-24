@@ -44,6 +44,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/products/{product}', [App\Http\Controllers\ProductController::class, 'update']);
     Route::delete('/products/{product}', [App\Http\Controllers\ProductController::class, 'destroy']);
 
+    // Analytics
+    Route::get('/cards/{businessCard}/analytics', [BusinessCardController::class, 'getAnalytics']);
+
     // Proprietors
     Route::get('/cards/{card}/proprietors', [App\Http\Controllers\ProprietorController::class, 'index']);
     Route::post('/cards/{card}/proprietors', [App\Http\Controllers\ProprietorController::class, 'store']);

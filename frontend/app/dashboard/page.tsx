@@ -6,11 +6,13 @@ import api from '@/lib/axios';
 import Sidebar from '@/components/dashboard/Sidebar';
 import CardEditor from '@/components/editor/CardEditor';
 import ProfileSettings from '@/components/dashboard/ProfileSettings';
-import { ExternalLink, Eye, Share2, User, Lock } from 'lucide-react';
+import AnalyticsDashboard from '@/components/dashboard/AnalyticsDashboard';
+import { ExternalLink, Eye, Share2, User, Lock, BarChart3 } from 'lucide-react';
 
 export default function Dashboard() {
     const router = useRouter();
     const [card, setCard] = useState<any>(null);
+    const [allCards, setAllCards] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<any>(null);
     const [activeTab, setActiveTab] = useState('business_details'); // Default to Business Details as per request for "Editor" Dashboard
@@ -22,8 +24,8 @@ export default function Dashboard() {
                     api.get('/cards'),
                     api.get('/user')
                 ]);
-                // Assuming single card policy, we take the first one if it exists
                 if (cardsRes.data.length > 0) {
+                    setAllCards(cardsRes.data);
                     // Fetch full details for the first card (slug might be needed if /cards response is compact)
                     // The list endpoint might not return products/proprietors, so let's fetch individual
                     const slug = cardsRes.data[0].slug;
@@ -144,6 +146,16 @@ export default function Dashboard() {
                                     </button>
 
                                     <button
+                                        onClick={() => setActiveTab('analytics')}
+                                        className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center hover:shadow-md transition-shadow group text-left"
+                                    >
+                                        <div className="w-10 h-10 bg-slate-50 dark:bg-slate-700 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 mr-4 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                                            <BarChart3 className="w-5 h-5" />
+                                        </div>
+                                        <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-blue-600">View Analytics</span>
+                                    </button>
+
+                                    <button
                                         onClick={() => setActiveTab('profile')}
                                         className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center hover:shadow-md transition-shadow group text-left"
                                     >
@@ -188,6 +200,10 @@ export default function Dashboard() {
 
                     {activeTab === 'profile' && (
                         <ProfileSettings user={user} onUpdateUser={setUser} />
+                    )}
+
+                    {activeTab === 'analytics' && (
+                        <AnalyticsDashboard cards={allCards} />
                     )}
                 </div>
             </main>

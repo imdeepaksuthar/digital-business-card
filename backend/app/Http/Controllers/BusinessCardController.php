@@ -272,4 +272,100 @@ class BusinessCardController extends Controller
 
         return response()->json($visit, 201);
     }
+    public function getAnalytics(Request $request, BusinessCard $businessCard)
+    {
+        if ($request->user()->id !== $businessCard->user_id) {
+            abort(403);
+        }
+
+        $startDate = $request->query('start_date', now()->subDays(30));
+        $endDate = $request->query('end_date', now());
+
+        $query = $businessCard->cardVisits()
+            ->whereBetween('visit_date', [$startDate, $endDate]);
+
+        // 1. Summary Counts
+        $summary = [
+            'views' => (clone $query)->where('type', 'view')->count(),
+            'clicks' => (clone $query)->where('type', 'click')->count(),
+            'scans' => (clone $query)->where('type', 'scan')->count(), // Assuming 'scan' type exists or will exist
+        ];
+
+        // 2. Chart Data (Daily)
+        // Note: DB::raw syntax might vary by DB driver, generic DATE() usually works.
+        // For better compatibility we can fetch and map in PHP if dataset is small, but DB is better.
+        // We'll use a simple collection grouping for portability in this demo context.
+        $visitsByDate = $businessCard->cardVisits()
+            ->whereBetween('visit_date', [$startDate, $endDate])
+            ->get()
+            ->groupBy(function($date) {
+                return \Carbon\Carbon::parse($date->visit_date)->format('Y-m-d');
+            });
+
+        $chartData = [];
+        $period = \Carbon\CarbonPeriod::create($startDate, $endDate);
+        foreach ($period as $date) {
+            $formattedDate = $date->format('Y-m-d');
+            $dayVisits = $visitsByDate->get($formattedDate, collect());
+            $chartData[] = [
+                'date' => $formattedDate,
+                'views' => $dayVisits->where('type', 'view')->count(),
+                'clicks' => $dayVisits->where('type', 'click')->count(),
+            ];
+        }
+
+        // 3. Button/Platform Breakdown (Clicks)
+        $clicks = $businessCard->cardVisits()
+            ->where('type', 'click')
+            ->whereBetween('visit_date', [$startDate, $endDate])
+            ->get();
+        
+        $buttonBreakdown = $clicks->groupBy(function($click) {
+            return $click->metadata['button'] ?? $click->metadata['platform'] ?? 'Unknown';
+        })->map(function($group, $key) use ($clicks) {
+            return [
+                'name' => ucfirst($key),
+                'count' => $group->count(),
+                'percentage' => $clicks->count() > 0 ? round(($group->count() / $clicks->count()) * 100, 1) : 0,
+            ];
+        })->values();
+
+        // 4. Traffic Source (Metadata source)
+        $sources = $businessCard->cardVisits()
+            ->whereBetween('visit_date', [$startDate, $endDate])
+            ->get()
+            ->groupBy(function($visit) {
+                 return $visit->metadata['source'] ?? 'Direct';
+            })->map(function($group, $key) use ($query) {
+                 // Note: query count is total for range
+                 $total = $group->count(); 
+                 return [
+                     'name' => ucfirst($key),
+                     'count' => $total,
+                 ];
+            })->values();
+
+        // 5. Recent Activity
+        $recentActivity = $businessCard->cardVisits()
+            ->latest('visit_date')
+            ->take(10)
+            ->get()
+            ->map(function($visit) {
+                return [
+                    'id' => $visit->id,
+                    'type' => $visit->type,
+                    'metadata' => $visit->metadata,
+                    'date' => $visit->visit_date,
+                    'ip' => $visit->ip_address, // Optional: might want to mask this for privacy
+                ];
+            });
+
+        return response()->json([
+            'summary' => $summary,
+            'chart_data' => $chartData,
+            'button_breakdown' => $buttonBreakdown,
+            'sources' => $sources,
+            'recent_activity' => $recentActivity,
+        ]);
+    }
 }

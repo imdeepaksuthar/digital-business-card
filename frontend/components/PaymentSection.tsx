@@ -38,18 +38,18 @@ export default function PaymentSection({ bankDetails, paymentQrCode, paymentMeth
     const showWalletTab = wallets.length > 0;
 
     return (
-        <div className="bg-slate-50 dark:bg-slate-800/50 md:bg-white md:dark:bg-slate-900 md:shadow-lg md:rounded-[2rem] p-6 rounded-3xl border border-slate-100 dark:border-slate-800 flex flex-col h-full">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider flex items-center gap-2">
+        <div className="glass-panel p-6 rounded-[2rem] flex flex-col h-full relative overflow-hidden">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
                 <CreditCard className="w-5 h-5 text-blue-500" />
                 <span>Payment Options</span>
             </h3>
 
-            {/* Tabs */}
-            <div className="flex p-1 bg-slate-200 dark:bg-slate-800 rounded-xl mb-6">
+            {/* Glass Tabs */}
+            <div className="flex p-1.5 bg-white/20 dark:bg-white/5 rounded-xl mb-6 backdrop-blur-sm border border-white/10">
                 {showQrTab && (
                     <button
                         onClick={() => setActiveTab('qr')}
-                        className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${activeTab === 'qr' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white' : 'text-slate-500 hover:text-slate-700'
+                        className={`flex-1 py-2.5 text-xs font-bold rounded-lg transition-all ${activeTab === 'qr' ? 'bg-white/80 dark:bg-white/10 shadow-sm text-slate-900 dark:text-white' : 'text-slate-500 hover:text-slate-700'
                             }`}
                     >
                         UPI / QR
@@ -58,7 +58,7 @@ export default function PaymentSection({ bankDetails, paymentQrCode, paymentMeth
                 {showBankTab && (
                     <button
                         onClick={() => setActiveTab('bank')}
-                        className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${activeTab === 'bank' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white' : 'text-slate-500 hover:text-slate-700'
+                        className={`flex-1 py-2.5 text-xs font-bold rounded-lg transition-all ${activeTab === 'bank' ? 'bg-white/80 dark:bg-white/10 shadow-sm text-slate-900 dark:text-white' : 'text-slate-500 hover:text-slate-700'
                             }`}
                     >
                         Bank Details
@@ -67,7 +67,7 @@ export default function PaymentSection({ bankDetails, paymentQrCode, paymentMeth
                 {showWalletTab && (
                     <button
                         onClick={() => setActiveTab('wallet')}
-                        className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${activeTab === 'wallet' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white' : 'text-slate-500 hover:text-slate-700'
+                        className={`flex-1 py-2.5 text-xs font-bold rounded-lg transition-all ${activeTab === 'wallet' ? 'bg-white/80 dark:bg-white/10 shadow-sm text-slate-900 dark:text-white' : 'text-slate-500 hover:text-slate-700'
                             }`}
                     >
                         Wallets
@@ -80,22 +80,22 @@ export default function PaymentSection({ bankDetails, paymentQrCode, paymentMeth
                     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
                         {paymentQrCode && (
                             <div className="flex flex-col items-center">
-                                <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200">
+                                <div className="bg-white p-4 rounded-2xl shadow-lg border border-white/40">
                                     <img src={paymentQrCode} alt="Payment QR" className="w-48 h-48 object-contain rounded-lg" />
                                 </div>
-                                <p className="text-xs font-semibold text-slate-500 mt-3 flex items-center gap-2">
+                                <p className="text-xs font-bold text-slate-500 mt-4 flex items-center gap-2 bg-white/30 px-3 py-1 rounded-full">
                                     <QrCode className="w-3 h-3" /> Scan to Pay
                                 </p>
                             </div>
                         )}
 
                         {upis.map(upi => (
-                            <div key={upi.id} className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 flex items-center justify-between">
+                            <div key={upi.id} className="glass-card p-4 rounded-xl flex items-center justify-between">
                                 <div>
-                                    <p className="text-xs text-slate-500">UPI ID</p>
-                                    <p className="font-mono font-medium">{upi.details.upi_id}</p>
+                                    <p className="text-[10px] font-bold uppercase text-slate-500 tracking-wide">UPI ID</p>
+                                    <p className="font-mono font-medium text-sm mt-1">{upi.details.upi_id}</p>
                                 </div>
-                                <button onClick={() => copyToClipboard(upi.details.upi_id, `upi-${upi.id}`)} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg">
+                                <button onClick={() => copyToClipboard(upi.details.upi_id, `upi-${upi.id}`)} className="p-2 hover:bg-white/20 rounded-lg transition-colors">
                                     {copied === `upi-${upi.id}` ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-slate-400" />}
                                 </button>
                             </div>
@@ -117,11 +117,11 @@ export default function PaymentSection({ bankDetails, paymentQrCode, paymentMeth
                 {activeTab === 'wallet' && (
                     <div className="grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
                         {wallets.map(wallet => (
-                            <div key={wallet.id} className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center">
-                                <Smartphone className="w-8 h-8 text-slate-400 mb-2" />
+                            <div key={wallet.id} className="glass-card p-4 rounded-xl flex flex-col items-center text-center hover:bg-white/40 transition-colors">
+                                <Smartphone className="w-8 h-8 text-blue-400 mb-3" />
                                 <p className="font-bold text-sm">{wallet.details.name}</p>
                                 <p className="text-xs text-slate-500 mt-1">{wallet.details.phone}</p>
-                                <button onClick={() => copyToClipboard(wallet.details.phone, `wallet-${wallet.id}`)} className="text-[10px] bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded mt-2 flex items-center gap-1">
+                                <button onClick={() => copyToClipboard(wallet.details.phone, `wallet-${wallet.id}`)} className="text-[10px] uppercase font-bold bg-white/50 px-3 py-1.5 rounded-lg mt-3 flex items-center gap-1 hover:text-blue-600 transition-colors">
                                     {copied === `wallet-${wallet.id}` ? 'Copied' : 'Copy'}
                                 </button>
                             </div>

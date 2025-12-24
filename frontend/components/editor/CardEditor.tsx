@@ -215,19 +215,23 @@ export default function CardEditor({ initialData, isEditing = false, userData }:
 
             // Append basic fields
             Object.keys(formData).forEach(key => {
+                if (['bank_details', 'social_links', 'products', 'proprietors', 'profile_photo', 'cover_photo', 'payment_qr_code'].includes(key)) return;
+
                 const value = (formData as any)[key];
-                if (key === 'bank_details') {
-                    // Flatten logic or send array/json? Backend expects JSON casted array? 
-                    // Ideally send keys like bank_details[bank_name] or just simple key iteration if backend can handle it.
-                    // Since backend casts to array, let's send it as individual keys if possible or just loop it.
-                    // Wait, Laravel casts 'bank_details' => 'array', so if we send bank_details[bank_name], it works.
-                    Object.keys(value).forEach(bdKey => {
-                        data.append(`bank_details[${bdKey}]`, value[bdKey] || '');
-                    });
-                } else if (value !== null && value !== undefined && typeof value !== 'object') {
+                if (value !== null && value !== undefined && typeof value !== 'object') {
                     data.append(key, value as string);
                 }
             });
+
+            // Handle Bank Details specifically (as before, but outside the loop logic which was inside the loop previously, wait. 
+            // The previous code had a specific check for 'bank_details' inside the loop. 
+            // I should preserve that or move it out. 
+            // Previous code:
+            // if (key === 'bank_details') { ... } else if (...) { ... }
+
+            // It's cleaner to handle bank_details specifically outside like the others if I exclude it.
+            // Let's rewrite the logic to excluded it from the generic loop and handle it explicitly.
+
 
             // Append Files
             if (profilePhoto) data.append('profile_photo', profilePhoto);
