@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import api from '@/lib/axios';
 import Sidebar from '@/components/dashboard/Sidebar';
 import CardEditor from '@/components/editor/CardEditor';
-import { ExternalLink, Eye, Share2, User } from 'lucide-react';
+import ProfileSettings from '@/components/dashboard/ProfileSettings';
+import { ExternalLink, Eye, Share2, User, Lock } from 'lucide-react';
 
 export default function Dashboard() {
     const router = useRouter();
@@ -143,12 +144,13 @@ export default function Dashboard() {
                                     </button>
 
                                     <button
-                                        className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center hover:shadow-md transition-shadow group text-left opacity-60 cursor-not-allowed"
+                                        onClick={() => setActiveTab('profile')}
+                                        className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center hover:shadow-md transition-shadow group text-left"
                                     >
-                                        <div className="w-10 h-10 bg-slate-50 dark:bg-slate-700 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 mr-4">
-                                            <div className="w-5 h-5 border-2 border-current rounded-full" />
+                                        <div className="w-10 h-10 bg-slate-50 dark:bg-slate-700 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 mr-4 group-hover:bg-purple-50 group-hover:text-purple-600 transition-colors">
+                                            <Lock className="w-5 h-5" />
                                         </div>
-                                        <span className="font-medium text-slate-700 dark:text-slate-200">Change Password</span>
+                                        <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-purple-600">Change Password</span>
                                     </button>
                                 </div>
                             </div>
@@ -185,21 +187,7 @@ export default function Dashboard() {
                     )}
 
                     {activeTab === 'profile' && (
-                        <div className="space-y-6">
-                            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Profile Settings</h1>
-                            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700">
-                                <div className="max-w-md space-y-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Full Name</label>
-                                        <input type="text" value={user?.name || ''} disabled className="w-full px-4 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-500" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email Address</label>
-                                        <input type="email" value={user?.email || ''} disabled className="w-full px-4 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-500" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <ProfileSettings user={user} onUpdateUser={setUser} />
                     )}
                 </div>
             </main>

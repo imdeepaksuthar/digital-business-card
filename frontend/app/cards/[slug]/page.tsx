@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Phone, Mail, Globe, MapPin, Facebook, Twitter, Instagram, Linkedin, Github, Calendar, Map, Smartphone, Download, MessageCircle, Clock, Award, Briefcase } from 'lucide-react';
+import { Phone, Mail, Globe, MapPin, Facebook, Twitter, Instagram, Linkedin, Github, Calendar, Map, Smartphone, Download, MessageCircle, Clock, Award, Briefcase, Users, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 // Components
@@ -217,7 +217,10 @@ export default async function PublicCard(props: any) {
                                     </p>
                                     {/* Why Choose Us Placeholders - can be dynamic later */}
                                     <div className="pt-4">
-                                        <h4 className="font-bold text-sm text-slate-900 dark:text-white mb-2">Why Choose Us?</h4>
+                                        <h4 className="font-bold text-sm text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                                            <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                                            Why Choose Us?
+                                        </h4>
                                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                             {['Professional Quality', 'On-time Delivery', 'Affordable Pricing'].map(item => (
                                                 <li key={item} className="flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 p-2 rounded-lg border border-slate-100 dark:border-slate-700">
@@ -239,6 +242,7 @@ export default async function PublicCard(props: any) {
                         {card.proprietors && card.proprietors.length > 0 && (
                             <div className="bg-slate-50 dark:bg-slate-800/50 md:bg-white md:dark:bg-slate-900 md:shadow-lg md:rounded-[2rem] p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
                                 <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                                    <Users className="w-4 h-4 text-blue-500" />
                                     Management Team
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -290,12 +294,10 @@ export default async function PublicCard(props: any) {
                             {/* Contact Details */}
                             {(card.address || card.phone || card.email) && (
                                 <div className="bg-white dark:bg-slate-900 md:shadow-lg md:rounded-[2rem] p-6 rounded-3xl border border-slate-100 dark:border-slate-800 flex flex-col h-full">
-                                    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-dashed border-slate-200 dark:border-slate-700">
-                                        <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center">
-                                            <Smartphone className="w-5 h-5" />
-                                        </div>
-                                        <h3 className="text-lg font-bold text-slate-900 dark:text-white">Get In Touch</h3>
-                                    </div>
+                                    <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                                        <Smartphone className="w-4 h-4 text-blue-500" />
+                                        Get In Touch
+                                    </h3>
 
                                     <div className="space-y-6 flex-1">
                                         {card.phone && (

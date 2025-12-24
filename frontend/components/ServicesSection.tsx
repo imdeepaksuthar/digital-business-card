@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Tag, ExternalLink } from 'lucide-react';
+import { Tag, ExternalLink, LayoutGrid } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Product {
@@ -39,6 +39,7 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
         <div className="bg-slate-50 dark:bg-slate-800/50 md:bg-white md:dark:bg-slate-900 md:shadow-lg md:rounded-[2rem] p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                    <LayoutGrid className="w-4 h-4 text-blue-500" />
                     Our Services
                 </h3>
 
@@ -49,8 +50,8 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                                 key={cat as string}
                                 onClick={() => setFilter(cat as string)}
                                 className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${filter === cat
-                                        ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-                                        : 'bg-white dark:bg-slate-800 text-slate-500 hover:bg-slate-100'
+                                    ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
+                                    : 'bg-white dark:bg-slate-800 text-slate-500 hover:bg-slate-100'
                                     }`}
                             >
                                 {cat as string}

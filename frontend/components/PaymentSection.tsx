@@ -39,7 +39,8 @@ export default function PaymentSection({ bankDetails, paymentQrCode, paymentMeth
 
     return (
         <div className="bg-slate-50 dark:bg-slate-800/50 md:bg-white md:dark:bg-slate-900 md:shadow-lg md:rounded-[2rem] p-6 rounded-3xl border border-slate-100 dark:border-slate-800 flex flex-col h-full">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider flex items-center justify-between">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-blue-500" />
                 <span>Payment Options</span>
             </h3>
 
