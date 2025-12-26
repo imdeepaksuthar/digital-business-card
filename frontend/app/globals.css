@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  /* Earthy Theme Colors */
-  --background: #3a4131;
-  /* Olive Green Base */
-  --foreground: #f8fafc;
+  /* Royal Glass Theme Colors */
+  --background: #0f172a;
+  /* Slate 900 */
+  --foreground: #ffffff;
 
-  --primary-green: #1f4d2b;
-  --primary-brown: #6b3618;
-  --accent-gold: #cfaa48;
+  --color-primary: #4f46e5;
+  /* Indigo 600 */
+  --color-secondary: #1e1b4b;
+  /* Indigo 950 */
+  --color-accent: #d4af37;
+  /* Metallic Gold */
 
-  /* Glass Variables - Adjusted for dark background */
+  /* Glass Variables */
   --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(20, 26, 20, 0.2);
+  --glass-bg: rgba(30, 27, 75, 0.4);
+  /* Indigo 950 alpha */
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   --glass-blur: 12px;
 }
@@ -28,8 +32,8 @@
 }
 
 body {
-  background: linear-gradient(135deg, #4b5320 0%, #2f331e 100%);
-  /* Olive Gradient */
+  background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 100%);
+  /* Royal Indigo/Slate Gradient */
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -46,10 +50,12 @@ body {
 }
 
 .glass-card {
-  background: rgba(40, 40, 30, 0.6);
+  background: rgba(30, 27, 75, 0.6);
+  /* Slightly more opaque for cards */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  /* Subtle Gold Border */
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 

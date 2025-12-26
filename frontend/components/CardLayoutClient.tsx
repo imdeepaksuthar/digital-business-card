@@ -150,7 +150,7 @@ END:VCARD`;
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
                         className={`relative group p-3 rounded-full transition-all duration-300 ${activeSection === item.id
-                            ? 'bg-[#cfaa48] text-[#1c2e22] shadow-[0_0_20px_rgba(207,170,72,0.4)] scale-110'
+                            ? 'bg-[#d4af37] text-[#1e1b4b] shadow-[0_0_20px_rgba(212,175,55,0.4)] scale-110'
                             : 'text-slate-400 hover:text-white hover:bg-white/10'
                             }`}
                     >
@@ -175,7 +175,7 @@ END:VCARD`;
                     <motion.div className="md:col-span-4 lg:col-span-4 flex flex-col gap-6" variants={itemVariants} id="home">
 
                         {/* PROFILE CARD */}
-                        <div className="bg-[#1c2e22]/40 backdrop-blur-md rounded-[2rem] overflow-hidden border border-white/5 relative group shadow-2xl">
+                        <div className="glass-panel rounded-[2rem] overflow-hidden relative group">
                             {/* Cover Photo */}
                             <div className="h-48 md:h-56 relative overflow-hidden">
                                 {card.cover_photo ? (
@@ -186,19 +186,19 @@ END:VCARD`;
                                         transition={{ duration: 0.8 }}
                                     />
                                 ) : (
-                                    <div className="absolute inset-0 bg-[#2f331e]" />
+                                    <div className="absolute inset-0 bg-[#1e1b4b]" />
                                 )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#1c2e22] via-[#1c2e22]/50 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/50 to-transparent" />
                             </div>
 
                             {/* Profile Info */}
                             <div className="relative px-6 pb-8 -mt-24 flex flex-col items-center text-center">
                                 {/* Avatar */}
                                 <motion.div
-                                    className="w-40 h-40 rounded-full p-1.5 bg-[#1c2e22] shadow-2xl border border-white/10 z-10"
+                                    className="w-40 h-40 rounded-full p-1.5 bg-[#1e1b4b] shadow-2xl border border-[#d4af37]/30 z-10"
                                     whileHover={{ scale: 1.05 }}
                                 >
-                                    <div className="w-full h-full rounded-full overflow-hidden bg-slate-800 border-4 border-[#2f331e]">
+                                    <div className="w-full h-full rounded-full overflow-hidden bg-slate-800 border-4 border-[#1e1b4b]">
                                         {card.profile_photo ? (
                                             <img src={card.profile_photo} alt={card.business_name} className="w-full h-full object-cover" />
                                         ) : (
@@ -215,7 +215,7 @@ END:VCARD`;
 
                                     {(card.primary_contact_designation || card.sub_header) && (
                                         <div className="mt-3">
-                                            <span className="inline-block px-4 py-1.5 rounded-full bg-[#cfaa48]/10 text-[#cfaa48] text-xs font-bold uppercase tracking-wider border border-[#cfaa48]/20">
+                                            <span className="inline-block px-4 py-1.5 rounded-full bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold uppercase tracking-wider border border-[#d4af37]/20">
                                                 {card.primary_contact_designation || card.sub_header}
                                             </span>
                                         </div>
@@ -229,7 +229,7 @@ END:VCARD`;
                                                     key={i}
                                                     href={link.url}
                                                     target="_blank"
-                                                    className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-[#cfaa48] hover:text-[#1c2e22] transition-all shadow-lg border border-white/5"
+                                                    className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-[#d4af37] hover:text-[#1e1b4b] transition-all shadow-lg border border-white/5"
                                                     whileHover={{ y: -3 }}
                                                 >
                                                     {getIcon(link.platform)}
@@ -240,10 +240,10 @@ END:VCARD`;
 
                                     {/* Action Buttons */}
                                     <div className="grid grid-cols-2 gap-3 w-full mt-8">
-                                        <a href={`tel:${card.phone}`} className="col-span-1 py-3.5 px-4 rounded-xl bg-[#2f331e] text-[#4ade80] hover:bg-[#3a4131] transition-all flex items-center justify-center gap-2 font-bold text-sm border border-white/5 shadow-lg group">
+                                        <a href={`tel:${card.phone}`} className="col-span-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-800 text-white hover:brightness-110 transition-all flex items-center justify-center gap-2 font-bold text-sm shadow-lg group shadow-indigo-500/20">
                                             <Phone className="w-4 h-4 group-hover:rotate-12 transition-transform" /> Call
                                         </a>
-                                        <a href={`mailto:${card.email}`} className="col-span-1 py-3.5 px-4 rounded-xl bg-[#4b2c20] text-[#fb923c] hover:bg-[#5d3a2b] transition-all flex items-center justify-center gap-2 font-bold text-sm border border-white/5 shadow-lg group">
+                                        <a href={`mailto:${card.email}`} className="col-span-1 py-3.5 px-4 rounded-xl bg-slate-800 text-[#d4af37] hover:bg-slate-700 transition-all flex items-center justify-center gap-2 font-bold text-sm border border-[#d4af37]/20 shadow-lg group">
                                             <Mail className="w-4 h-4 group-hover:rotate-12 transition-transform" /> Email
                                         </a>
                                         <button
@@ -265,28 +265,28 @@ END:VCARD`;
 
                         {/* Leadership - REFACTORED DESIGN */}
                         {card.proprietors?.length > 0 && (
-                            <motion.section id="leadership" variants={itemVariants} className="bg-[#3a4131] p-6 rounded-[2rem] scroll-mt-24 border border-white/5 shadow-2xl">
-                                <h2 className="text-sm font-bold uppercase tracking-wider mb-6 flex items-center gap-2 text-[#cfaa48] opacity-90">
+                            <motion.section id="leadership" variants={itemVariants} className="glass-panel p-6 rounded-[2rem] scroll-mt-24">
+                                <h2 className="text-sm font-bold uppercase tracking-wider mb-6 flex items-center gap-2 text-[#d4af37] opacity-90">
                                     <Users className="w-4 h-4" /> Leadership
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {card.proprietors.map((p: any, i: number) => (
-                                        <div key={i} className="flex items-center gap-4 p-5 rounded-2xl bg-[#2f331e] border border-white/5 hover:border-[#cfaa48]/30 transition-all group">
-                                            <div className="w-16 h-16 rounded-full bg-slate-800 overflow-hidden shrink-0 border-2 border-white/10 group-hover:border-[#cfaa48] transition-colors shadow-lg">
+                                        <div key={i} className="flex items-center gap-4 p-5 rounded-2xl glass-card hover:border-[#d4af37]/50 transition-all group">
+                                            <div className="w-16 h-16 rounded-full bg-slate-800 overflow-hidden shrink-0 border-2 border-white/10 group-hover:border-[#d4af37] transition-colors shadow-lg">
                                                 {p.photo ? <img src={p.photo} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center font-bold text-slate-500">{p.name[0]}</div>}
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <h4 className="font-bold text-lg text-white truncate group-hover:text-[#cfaa48] transition-colors">{p.name}</h4>
-                                                <p className="text-sm text-[#8c9f90] font-medium truncate mb-2">{p.designation}</p>
+                                                <h4 className="font-bold text-lg text-white truncate group-hover:text-[#d4af37] transition-colors">{p.name}</h4>
+                                                <p className="text-sm text-slate-400 font-medium truncate mb-2">{p.designation}</p>
 
                                                 <div className="flex gap-3">
                                                     {p.phone && (
-                                                        <a href={`tel:${p.phone}`} className="w-8 h-8 rounded-full bg-[#1c2e22] flex items-center justify-center text-[#4ade80] hover:bg-[#4ade80] hover:text-[#1c2e22] transition-colors border border-white/5">
+                                                        <a href={`tel:${p.phone}`} className="w-8 h-8 rounded-full bg-[#1e1b4b] flex items-center justify-center text-white hover:bg-[#d4af37] hover:text-[#1e1b4b] transition-colors border border-white/5">
                                                             <Phone className="w-3.5 h-3.5" />
                                                         </a>
                                                     )}
                                                     {p.email && (
-                                                        <a href={`mailto:${p.email}`} className="w-8 h-8 rounded-full bg-[#1c2e22] flex items-center justify-center text-[#fb923c] hover:bg-[#fb923c] hover:text-[#1c2e22] transition-colors border border-white/5">
+                                                        <a href={`mailto:${p.email}`} className="w-8 h-8 rounded-full bg-[#1e1b4b] flex items-center justify-center text-white hover:bg-[#d4af37] hover:text-[#1e1b4b] transition-colors border border-white/5">
                                                             <Mail className="w-3.5 h-3.5" />
                                                         </a>
                                                     )}

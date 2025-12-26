@@ -38,8 +38,8 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
     return (
         <div className="glass-panel p-6 md:p-8 rounded-[2rem] transition-all">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                    <LayoutGrid className="w-4 h-4 text-blue-500" />
+                <h3 className="text-sm font-bold text-[#d4af37] uppercase tracking-wider flex items-center gap-2">
+                    <LayoutGrid className="w-4 h-4 text-[#d4af37]" />
                     Our Services
                 </h3>
 
@@ -50,8 +50,8 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                                 key={cat as string}
                                 onClick={() => setFilter(cat as string)}
                                 className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all backdrop-blur-md ${filter === cat
-                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
-                                    : 'bg-white/30 dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:bg-white/50 border border-white/20'
+                                    ? 'bg-[#4f46e5] text-white shadow-lg shadow-indigo-500/30'
+                                    : 'bg-white/5 text-slate-400 hover:bg-white/10 border border-white/10'
                                     }`}
                             >
                                 {cat as string}
@@ -77,7 +77,7 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                                 {product.image ? (
                                     <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center bg-blue-500/5 text-slate-400">
+                                    <div className="w-full h-full flex items-center justify-center bg-[#4f46e5]/5 text-slate-400">
                                         <Tag className="w-8 h-8 opacity-20" />
                                     </div>
                                 )}
@@ -102,7 +102,7 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                                 <div className="flex items-center gap-2 mt-auto">
                                     <button
                                         onClick={() => handleEnquiry(product.name)}
-                                        className="flex-1 py-2.5 bg-blue-600/10 text-blue-600 dark:text-blue-400 uppercase tracking-wide text-[10px] font-bold rounded-xl hover:bg-blue-600 hover:text-white transition-all border border-blue-600/10 hover:shadow-lg hover:shadow-blue-600/20"
+                                        className="flex-1 py-2.5 bg-[#4f46e5]/10 text-[#4f46e5] uppercase tracking-wide text-[10px] font-bold rounded-xl hover:bg-[#4f46e5] hover:text-white transition-all border border-[#4f46e5]/20 hover:shadow-lg hover:shadow-indigo-500/20"
                                     >
                                         Enquire Now
                                     </button>
@@ -111,7 +111,7 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                                             href={product.link}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="p-2.5 bg-slate-100/50 dark:bg-slate-700/50 text-slate-500 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 hover:text-slate-900 transition-colors"
+                                            className="p-2.5 bg-white/5 text-slate-400 rounded-xl hover:bg-white/10 hover:text-white transition-colors"
                                         >
                                             <ExternalLink className="w-4 h-4" />
                                         </a>
