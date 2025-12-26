@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  /* Base Colors */
-  --background: #f8fafc;
-  /* Slate 50 */
-  --foreground: #0f172a;
-  /* Slate 900 */
+  /* Earthy Theme Colors */
+  --background: #3a4131;
+  /* Olive Green Base */
+  --foreground: #f8fafc;
 
-  /* Glass Variables */
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  --glass-blur: 20px;
+  --primary-green: #1f4d2b;
+  --primary-brown: #6b3618;
+  --accent-gold: #cfaa48;
+
+  /* Glass Variables - Adjusted for dark background */
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(20, 26, 20, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --glass-blur: 12px;
 }
 
 @theme {
@@ -24,26 +27,13 @@
   --blur-glass: var(--glass-blur);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    /* Slate 950 */
-    --foreground: #f8fafc;
-    /* Slate 50 */
-
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(15, 23, 42, 0.3);
-    /* Darker glass for dark mode */
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  }
-}
-
 body {
-  background: var(--background);
+  background: linear-gradient(135deg, #4b5320 0%, #2f331e 100%);
+  /* Olive Gradient */
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  /* Prevent horizontal scroll from animations */
+  min-height: 100vh;
 }
 
 /* Glassmorphism Utility Classes */
@@ -56,26 +46,18 @@ body {
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.25);
-  /* Slightly more transparent */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-}
-
-.dark .glass-card {
-  background: rgba(30, 41, 59, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background: rgba(40, 40, 30, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .text-gradient {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to right, #2563eb, #0891b2);
-  /* Blue to Cyan */
+  background-image: linear-gradient(to right, #e2e8f0, #cbd5e1);
 }
 
 /* Scrollbar hiding for horizontal scroll areas */

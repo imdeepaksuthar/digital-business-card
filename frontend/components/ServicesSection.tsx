@@ -61,7 +61,7 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                 )}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex overflow-x-auto snap-x snap-mandatory scroll-pl-6 pb-8 -mx-6 px-6 lg:grid lg:grid-cols-3 lg:pb-0 lg:mx-0 lg:px-0 lg:overflow-visible gap-6 no-scrollbar">
                 <AnimatePresence mode='popLayout'>
                     {filteredProducts.map((product) => (
                         <motion.div
@@ -71,7 +71,7 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                             exit={{ opacity: 0, scale: 0.9 }}
                             transition={{ duration: 0.3 }}
                             key={product.id}
-                            className="glass-card rounded-2xl overflow-hidden group hover:bg-white/60 dark:hover:bg-slate-800/60 transition-colors flex flex-col h-full"
+                            className="glass-card rounded-2xl overflow-hidden group hover:bg-white/60 dark:hover:bg-slate-800/60 transition-colors flex flex-col h-full min-w-[85vw] sm:min-w-[320px] md:min-w-[340px] snap-center md:snap-start lg:min-w-0 lg:w-auto"
                         >
                             <div className="h-48 relative overflow-hidden">
                                 {product.image ? (
