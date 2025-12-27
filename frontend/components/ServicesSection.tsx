@@ -71,38 +71,44 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                             exit={{ opacity: 0, scale: 0.9 }}
                             transition={{ duration: 0.3 }}
                             key={product.id}
-                            className="glass-card rounded-2xl overflow-hidden group hover:bg-white/60 dark:hover:bg-slate-800/60 transition-colors flex flex-col h-full min-w-[85vw] sm:min-w-[320px] md:min-w-[340px] snap-center md:snap-start lg:min-w-0 lg:w-auto"
+                            className="glass-card rounded-2xl overflow-hidden group hover:border-[#d4af37]/50 transition-all flex flex-col h-full min-w-[85vw] sm:min-w-[320px] md:min-w-[340px] snap-center md:snap-start lg:min-w-0 lg:w-auto bg-gradient-to-br from-white/5 to-transparent relative"
                         >
-                            <div className="h-48 relative overflow-hidden">
+                            {/* Decorative background glow */}
+                            <div className="absolute -right-12 -top-12 w-32 h-32 bg-[#d4af37]/10 rounded-full blur-3xl group-hover:bg-[#d4af37]/20 transition-all duration-500 pointer-events-none" />
+
+                            <div className="h-52 relative overflow-hidden bg-slate-900/50">
                                 {product.image ? (
                                     <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center bg-[#4f46e5]/5 text-slate-400">
-                                        <Tag className="w-8 h-8 opacity-20" />
+                                    <div className="w-full h-full flex items-center justify-center bg-[#1e1b4b]/30 text-slate-500">
+                                        <Tag className="w-10 h-10 opacity-20" />
                                     </div>
                                 )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent opacity-60" />
+
                                 {product.price && (
-                                    <div className="absolute top-3 right-3">
-                                        <span className="bg-black/60 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
+                                    <div className="absolute top-3 right-3 z-10">
+                                        <span className="bg-black/70 backdrop-blur-md text-[#d4af37] text-xs font-bold px-3 py-1.5 rounded-xl border border-[#d4af37]/20 shadow-lg">
                                             {product.price}
                                         </span>
                                     </div>
                                 )}
                             </div>
-                            <div className="p-5 flex flex-col flex-1">
-                                <h4 className="font-bold text-slate-900 dark:text-white text-base line-clamp-1 mb-1" title={product.name}>
+
+                            <div className="p-6 flex flex-col flex-1 relative z-10">
+                                <h4 className="font-bold text-white text-lg line-clamp-1 mb-2 group-hover:text-[#d4af37] transition-colors" title={product.name}>
                                     {product.name}
                                 </h4>
                                 {product.description && (
-                                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2 flex-1 mb-4">
+                                    <p className="text-sm text-slate-300 leading-relaxed line-clamp-2 flex-1 mb-6 font-light">
                                         {product.description}
                                     </p>
                                 )}
 
-                                <div className="flex items-center gap-2 mt-auto">
+                                <div className="flex items-center gap-3 mt-auto">
                                     <button
                                         onClick={() => handleEnquiry(product.name)}
-                                        className="flex-1 py-2.5 bg-[#4f46e5]/10 text-[#4f46e5] uppercase tracking-wide text-[10px] font-bold rounded-xl hover:bg-[#4f46e5] hover:text-white transition-all border border-[#4f46e5]/20 hover:shadow-lg hover:shadow-indigo-500/20"
+                                        className="flex-1 py-3 px-4 bg-[#4f46e5] text-white uppercase tracking-wider text-[10px] font-bold rounded-xl hover:bg-[#4338ca] transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
                                     >
                                         Enquire Now
                                     </button>
@@ -111,7 +117,8 @@ export default function ServicesSection({ products, whatsappNumber }: ServicesSe
                                             href={product.link}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="p-2.5 bg-white/5 text-slate-400 rounded-xl hover:bg-white/10 hover:text-white transition-colors"
+                                            className="p-3 bg-white/5 text-slate-400 rounded-xl hover:bg-[#d4af37] hover:text-[#1e1b4b] transition-all border border-white/5 hover:border-[#d4af37]/20 shadow-lg"
+                                            title="View Details"
                                         >
                                             <ExternalLink className="w-4 h-4" />
                                         </a>

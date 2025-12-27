@@ -44,53 +44,64 @@ export default function ContactForm({ cardId, whatsappNumber }: ContactFormProps
     };
 
     return (
-        <div className="glass-panel p-6 md:p-8 rounded-[2rem] h-full flex flex-col">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2 uppercase tracking-wide">
-                <MessageCircle className="w-5 h-5 text-blue-500" />
+        <div className="glass-panel p-6 md:p-8 rounded-[2rem] h-full flex flex-col relative overflow-hidden">
+            {/* Decorative Background Icon */}
+            <div className="absolute top-0 right-0 p-6 opacity-[0.03] pointer-events-none">
+                <MessageCircle className="w-32 h-32 text-white" />
+            </div>
+
+            <h3 className="text-sm font-bold text-[#cfaa48] mb-6 uppercase tracking-wider flex items-center gap-2 border-b border-white/5 pb-2 relative z-10">
+                <MessageCircle className="w-4 h-4 text-[#cfaa48]" />
                 Quick Enquiry
             </h3>
 
             {success ? (
-                <div className="p-8 bg-green-500/10 text-green-600 rounded-2xl text-center border border-green-500/20 my-auto">
-                    <p className="font-bold text-lg mb-2">Thank you!</p>
-                    <p className="text-sm">We have received your message.</p>
-                    <button onClick={() => setSuccess(false)} className="text-xs font-bold underline mt-4 hover:text-green-800">Send another</button>
+                <div className="p-8 bg-[#d4af37]/10 text-[#d4af37] rounded-2xl text-center border border-[#d4af37]/20 my-auto relative z-10 animate-in fade-in zoom-in duration-300">
+                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/20 flex items-center justify-center mx-auto mb-4">
+                        <MessageCircle className="w-6 h-6 text-[#cfaa48]" />
+                    </div>
+                    <p className="font-bold text-lg mb-2 text-white">Message Sent!</p>
+                    <p className="text-xs text-slate-400">We'll get back to you shortly.</p>
+                    <button onClick={() => setSuccess(false)} className="text-xs font-bold uppercase tracking-wider underline mt-6 hover:text-white transition-colors">Send another</button>
                 </div>
             ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 flex-1">
-                    <div>
+                <form onSubmit={handleSubmit} className="space-y-4 flex-1 relative z-10">
+                    <div className="group">
+                        <label className="text-[10px] font-bold uppercase text-slate-500 tracking-wider mb-1.5 block group-focus-within:text-[#cfaa48] transition-colors">Name</label>
                         <input
                             type="text"
-                            placeholder="Your Name"
+                            placeholder="Enter your name"
                             required
                             value={form.name}
                             onChange={e => setForm({ ...form, name: e.target.value })}
-                            className="w-full px-4 py-3.5 rounded-xl bg-white/40 dark:bg-white/5 border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-400 text-sm backdrop-blur-sm"
+                            className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:border-[#cfaa48]/50 focus:ring-1 focus:ring-[#cfaa48]/50 transition-all placeholder:text-slate-600 text-sm text-slate-200 backdrop-blur-sm"
                         />
                     </div>
-                    <div>
+                    <div className="group">
+                        <label className="text-[10px] font-bold uppercase text-slate-500 tracking-wider mb-1.5 block group-focus-within:text-[#cfaa48] transition-colors">Phone Number</label>
                         <input
                             type="tel"
-                            placeholder="Your Phone Number"
+                            placeholder="Enter your mobile number"
                             required
                             value={form.phone}
                             onChange={e => setForm({ ...form, phone: e.target.value })}
-                            className="w-full px-4 py-3.5 rounded-xl bg-white/40 dark:bg-white/5 border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-400 text-sm backdrop-blur-sm"
+                            className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:border-[#cfaa48]/50 focus:ring-1 focus:ring-[#cfaa48]/50 transition-all placeholder:text-slate-600 text-sm text-slate-200 backdrop-blur-sm"
                         />
                     </div>
-                    <div>
+                    <div className="group">
+                        <label className="text-[10px] font-bold uppercase text-slate-500 tracking-wider mb-1.5 block group-focus-within:text-[#cfaa48] transition-colors">Message</label>
                         <textarea
-                            placeholder="Message (Optional)"
+                            placeholder="How can we help you?"
                             rows={3}
                             value={form.message}
                             onChange={e => setForm({ ...form, message: e.target.value })}
-                            className="w-full px-4 py-3.5 rounded-xl bg-white/40 dark:bg-white/5 border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-400 text-sm resize-none backdrop-blur-sm"
+                            className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:border-[#cfaa48]/50 focus:ring-1 focus:ring-[#cfaa48]/50 transition-all placeholder:text-slate-600 text-sm text-slate-200 resize-none backdrop-blur-sm"
                         />
                     </div>
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70 shadow-lg shadow-blue-500/30 mt-2"
+                        className="w-full py-3.5 rounded-xl bg-[#d4af37] hover:bg-[#b08d26] text-[#0f172a] font-bold text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-[#d4af37]/20 hover:shadow-[#d4af37]/40 mt-4"
                     >
                         {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                         Send Message
